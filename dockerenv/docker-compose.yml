@@ -1,0 +1,15 @@
+version: '3.2'
+
+services:
+  spekle-core:
+    image: spekle-core
+    volumes:
+      - type: bind
+        source: ../
+        target: /usr/spekle-core/
+    build: .
+    ports:
+      - 3000:3000
+    # entrypoint: /bin/sh    
+    # stdin_open: true
+    # tty: true
