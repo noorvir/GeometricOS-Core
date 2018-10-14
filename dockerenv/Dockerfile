@@ -5,7 +5,8 @@ FROM ros:lunar-robot
 RUN apt-get update -qq && \
     apt-get upgrade -qq && \
     apt-get install -qq build-essential clang && \
-    apt-get install -qq curl git htop man unzip vim wget nano
+    apt-get install -qq curl git htop man unzip vim wget nano \
+    apt-get install ros-lunar-rqt ros-lunar-rqt-common-plugins
 
 # Copy the current folder which contains C++ source code to the Docker image under /usr/src
 # COPY . /usr/spekle-core/
