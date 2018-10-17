@@ -1,3 +1,12 @@
 
 build/
+install/
+*.cmake
+*.pyc
+
+# ROS
 devel/
+**/.catkin_workspace
+
+# Editors
+*.vscode
