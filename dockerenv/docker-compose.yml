@@ -7,9 +7,21 @@ services:
       - type: bind
         source: ../
         target: /usr/spekle-core/
+      - ./.container_env/ros/:/usr/try/
+      # - /opt/ros/lunar/setup.bash
+    # command: sleep infinity
+      # - type: volume
+      #   read_only: true
+      #   source: container_env
+      #   target: /opt/ros/
+    # command: /bin/bash
     build: .
     ports:
       - 3000:3000
-    # entrypoint: /bin/sh    
-    # stdin_open: true
-    # tty: true
+    entrypoint: /bin/bash   
+    stdin_open: true
+    tty: true
+
+
+docker run ---mount source=snipe-vol,dst=/var/lib/snipeit snipe/snipe-it
+This apparently mount the dst in the container on the host under /var/lib/docker/volumes/snipe-vol (Ubuntu)
