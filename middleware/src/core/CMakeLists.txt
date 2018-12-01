@@ -1,24 +1,24 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(core)
 
+# set(CMAKE_PREFIX_PATH /usr/local/include)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}")
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
-set(OpenCV_DIR /usr/local/lib/cmake/opencv4/)
-set(OpenCV_DIR /usr/local/lib/cmake/opencv4/)
+# set(OpenCV_DIR /usr/local/lib/cmake/opencv4/)
+# set(Pangolin_DIR /home/noorvir/Documents/projects/libraries/Pangolin/build/src/)
 # set(efusion_DIR /home/noorvir/Documents/projects/libraries/ElasticFusion/Core/src/)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(
-    catkin REQUIRED
-    OpenCV REQUIRED
-    )
-    
-find_package(efusion MODULE REQUIRED)
+find_package(catkin REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(Pangolin REQUIRED)
+find_package(CUDA REQUIRED)
+find_package(efusion REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -126,11 +126,9 @@ include_directories(
     include
     ${OpenCV_INCLUDE_DIRS}
     ${EFUSION_INCLUDE_DIRS}
+    ${Pangolin_INCLUDE_DIRS}
+    ${CUDA_INCLUDE_DIRS}
     /opt/ros/lunar/include
-    /usr/include/eigen3
-    /home/noorvir/Documents/projects/libraries/Pangolin/include
-    /home/noorvir/Documents/projects/libraries/Pangolin/build/src/include
-    /usr/local/cuda/include
 # ${catkin_INCLUDE_DIRS}
 )
 
@@ -166,9 +164,18 @@ add_executable(
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(core
-  ${catkin_LIBRARIES}
+target_link_libraries(
+    core
+    ${OpenCV_LIBRARIES}
+    ${catkin_LIBRARIES}
+    ${EFUSION_LIBRARY}
+    ${Pangolin_LIBRARIES}
+    ${CUDA_LIBRARIES}
 )
+
+if(NOT WIN32)
+  mark_as_advanced(EFUSION_LIBRARY EFUSION_INCLUDE_DIR)
+endif()
 
 #############
 ## Install ##

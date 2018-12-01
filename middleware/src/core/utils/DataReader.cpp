@@ -3,7 +3,7 @@
 #include <opencv2/highgui.hpp>
 
 #include <iostream>
-// #include <ros/ros.h>
+#include <ros/ros.h>
 #include "DataReader.h"
 
 using namespace cv;
