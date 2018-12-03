@@ -16,17 +16,12 @@
 
 #include <iostream>
 #include <ros/ros.h>
-
-using namespace cv;
-using namespace std;
-using namespace ros;
-
-
+#include <string.h>
 
 class DataReader{
     public:
-        cv::Mat readRGBImage(String);
-        cv::Mat readDepthImage();
+        cv::Mat readRGBImage(std::string);
+        cv::Mat readDepthImage(std::string);
         DataReader();
 
     private:

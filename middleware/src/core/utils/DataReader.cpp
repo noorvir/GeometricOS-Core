@@ -6,16 +6,12 @@
 #include <ros/ros.h>
 #include "DataReader.h"
 
-using namespace cv;
-using namespace std;
-// using namespace ros;
-
 
 DataReader::DataReader(void){
     std::cout << "/* message */" << '\n';
 }
 
-cv::Mat DataReader::readRGBImage(String imagePath){
+cv::Mat DataReader::readRGBImage(std::string imagePath){
 
     cv::Mat image;
     image = cv::imread(imagePath);
@@ -23,7 +19,10 @@ cv::Mat DataReader::readRGBImage(String imagePath){
     return image;
 }
 
-cv::Mat DataReader::readDepthImage(){
-
+cv::Mat DataReader::readDepthImage(std::string imagePath){
+    cv::Mat image;
+    image = cv::imread(imagePath);
+    
+    return image;
 }
 
