@@ -1,6 +1,15 @@
 /*
+ *
+ * - Start service to listen for node creation requests 
+ * - on request for node, create it and keep track of it
  * 
+ * # Specifically:
+ *  - initialise a DataReader node
+ *  - inside the datareader, publish images read from a directory 
+ *      as a image_transport stream.
+ *  
  */
+
 #include <ElasticFusion.h>
 #include "utils/DataReader.h"
 
@@ -11,6 +20,11 @@
 #include <dirent.h>
 #include <string.h>
 
+void loop(){
+
+}
+
+
 int main(int argc, char const *argv[])
 {
     /*
@@ -20,8 +34,13 @@ int main(int argc, char const *argv[])
      * 
      */
     
+    ElasticFusion eFusion;
+
     cv::Mat rgbImage;
     cv::Mat depthImage;
+    unsigned char * rgbData;
+    unsigned short * depthData;
+
     DataReader dataReader;
 
     std::string rgbDirPath = "/home/noorvir/Documents/data/rgbd_dataset_freiburg1_xyz/rgb/";
@@ -67,6 +86,12 @@ int main(int argc, char const *argv[])
             cv::imshow("Depth Image", depthImage);
         }
         cv::waitKey(100);
+
+        rgbData = rgbImage.data;
+        depthData = depthImage.data;
+
+        eFusion.processFrame(rgbData, depthData, logReader->timestamp, currentPose, weightMultiplier);;
+
     }
 
     closedir(depthDir);
@@ -79,8 +104,6 @@ int main(int argc, char const *argv[])
     // windowParams.Set("SAMPLES", 0);
     
     // pangolin::CreateWindowAndBind("Main", 1280, 800, windowParams);
-
-    
     
     return 0;
 }

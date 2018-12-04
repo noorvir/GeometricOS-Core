@@ -20,6 +20,9 @@
 
 class DataReader{
     public:
+        void readFromDirectory(std::string);
+        void getNext();
+        bool hasMore();
         cv::Mat readRGBImage(std::string);
         cv::Mat readDepthImage(std::string);
         DataReader();

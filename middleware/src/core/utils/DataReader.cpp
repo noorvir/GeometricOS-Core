@@ -8,7 +8,29 @@
 
 
 DataReader::DataReader(void){
+    ros::ini
     std::cout << "/* message */" << '\n';
+}
+
+/**
+ * @brief 
+ * 
+ * @param dirPath 
+ */
+void DataReader::readFromDirectory(std::string dirPath){
+
+}
+
+/**
+ * @brief 
+ * 
+ */
+void DataReader::getNext(){
+
+}
+
+bool DataReader::hasMore(){
+    return 1
 }
 
 cv::Mat DataReader::readRGBImage(std::string imagePath){
